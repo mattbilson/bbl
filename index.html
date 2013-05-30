@@ -1,0 +1,89 @@
+<html>
+    <head>
+        <style>
+            i {
+                color: green;
+                font-weight: bold;
+            }
+            
+            body {
+                font-size: 12px;
+            }
+        </style>
+        <title>bbl Test Harness</title>
+        <script src=js/jquery.js>
+        </script>
+        <script src=js/translate.js charset="utf-8">
+        </script>
+        <script>
+            function showKeys(){
+                var d = _.getDictionary();
+                var htm = "<b>Valid Keys</b><br>";
+                var keys = Object.keys(d);
+                for (var o in keys) {
+                    htm += (keys[o]) + ' = ' + d[keys[o]] + '<br>';
+                }
+                document.getElementById('keys').innerHTML = htm;
+            }
+            
+            function doTrans(){
+                var a = document.getElementById('phrase').value;
+                document.getElementById('resultDiv').innerHTML = _(a);
+            }
+            
+            function doOtherTrans(){
+                var x = _('This is story {0} of {1}', ['one', 'forty']);
+                document.getElementById('resultDiv').innerHTML = x;
+            }
+        </script>
+    </head>
+    <body>
+        <h1 data-trans-html="bbl Translator Library"></h1>
+        <h2 data-trans-html="Usage"></h2>
+        <span data-trans-html="Language Resource"></span>: 
+        <select name=langFile onchange='_.resource(this.options[this.selectedIndex].value)'>
+            <option id='o1' data-trans-text="Use the {0} resource" data-parms="trans_l10n_en" value='js/trans_l10n_en.js'></option>
+            <option id='02' data-trans-text="Use the {0} resource" data-parms="trans_l10n_fr" value='js/trans_l10n_fr.js'></option>
+        </select>
+        <br>
+        <pre>
+		// <span data-trans-html="change the resource"></span>
+		_.resource('js/trans_l10n_fr.js');
+		
+		// <span data-trans-html="translate something"></span>
+		var txt = _('one'); 
+		// <span data-trans-html="outputs"></span> <i>une</i>
+		var txt = _('forty'); 
+		// <span data-trans-html="outputs"></span> <i>quarante</i>
+		
+		var txt = _('This is a story'); 
+		// <span data-trans-html="outputs"></span> <i>C'est une histoire</i>
+
+		var txt = _('This is story {0} of {1}',['1','40']); 
+		// <span data-trans-html="outputs"></span> <i>C'est l'histoire 1 sur 40</i>
+
+		var txt = _('This is story {0} of {1}',['one','forty']); 
+		// <span data-trans-html="outputs"></span> <i>C'est l'histoire une sur quarante</i>
+		
+		Could also have:
+			&lt;div data-trans-html="This is story {0} of {1}" data-parms="one|forty">&lt;/div>
+			<div style="margin-left:200px;margin-top:-10px;border:1px solid gray;width:250px" data-trans-html="This is story {0} of {1}" data-parms="one|forty"></div>
+		</pre>
+        <div id="keys" style="display:none">
+        </div>
+         <form>
+            <input id=phrase size=20 value="This is a story"><input type=button data-trans-value="Translate" onclick='doTrans()'>
+        </form><input type='button' id='transBtn' data-trans-value="Translate" style='width:100px;height:20px' onclick="doOtherTrans()">
+        </input>This is story one of forty via <b>_('This is story {0} of {1}',['one','forty'])</b>
+        <br>
+        <br>
+        <div id="resultDiv" style="border:1px solid black;width:300px;height:30px;">
+        </div>
+        <br>
+        <script>
+            // initialize translation service
+			// this will automatically translate all data-trans-* elements
+            _.resource('js/trans_l10n_en.js');
+        </script>
+    </body>
+</html>

@@ -4,9 +4,7 @@ bbl
 <b>Hyperlightweight Javascript Library for Localization, supporting both declarative and imperative modes.</b>
 <br>
 <h3>Usage</h3>
-Use bbl to dynamically load localization resources that contain translations from a base language into a local one.
-
-This can be done in one of two ways -- imperatively in Javascript, or declaratively in HTML markup.
+Use bbl to dynamically load localization resources that contain phrase translations from a base language into a local one, and have those translations performed automatically on existing DOM elements, or programmatically via Javascript.
 
 <h4>Setup</h4>
 This library requires JQuery for the dynamic loading component (AJAX get).

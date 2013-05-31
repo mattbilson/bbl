@@ -10,7 +10,7 @@
                 font-size: 12px;
             }
         </style>
-        <title>bbl Test Harness</title>
+        <title>bbl</title>
         <script src=http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js>
         </script>
         <script src=js/bbl.js charset="utf-8">
@@ -34,13 +34,13 @@
             }
             
             function doOtherTrans(){
-                var x = bbl('This is story {0} of {1}', ['one', 'forty']);
+                var x = bbl('This is sample {0} of {1}', ['one', 'forty']);
                 document.getElementById('resultDiv').innerHTML = x;
             }
         </script>
     </head>
     <body>
-        <h1 data-bbl-html="bbl Translator Library"></h1>
+        <h1 data-bbl-html="bbl Localization Service"></h1>
         <h2 data-bbl-html="Usage"></h2>
         <span data-bbl-html="Language Resource"></span>: 
         <select name=langFile onchange='bbl.resource(this.options[this.selectedIndex].value,showKeys)'>
@@ -60,23 +60,23 @@
 		var txt = bbl('forty'); 
 		// <span data-bbl-html="outputs"></span> <i>quarante</i>
 		
-		var txt = bbl('This is a story'); 
-		// <span data-bbl-html="outputs"></span> <i>C'est une histoire</i>
+		var txt = bbl('This is a sample'); 
+		// <span data-bbl-html="outputs"></span> <i>Ceci est un exemple</i>
 
-		var txt = bbl('This is story {0} of {1}',['1','40']); 
-		// <span data-bbl-html="outputs"></span> <i>C'est l'histoire 1 sur 40</i>
+		var txt = bbl('This is sample {0} of {1}',['1','40']); 
+		// <span data-bbl-html="outputs"></span> <i>C'est échantillon 1 sur 40</i>
 
-		var txt = bbl('This is story {0} of {1}',['one','forty']); 
-		// <span data-bbl-html="outputs"></span> <i>C'est l'histoire une sur quarante</i>
+		var txt = bbl('This is sample {0} of {1}',['one','forty']); 
+		// <span data-bbl-html="outputs"></span> <i>C'est échantillon une sur quarante</i>
 		
 		Could also have:
-			&lt;div data-bbl-html="This is story {0} of {1}" data-bbl-parms="one|forty">&lt;/div>
-			<div style="margin-left:200px;margin-top:-10px;border:1px solid gray;width:250px" data-bbl-html="This is story {0} of {1}" data-bbl-parms="one|forty"></div>
+			&lt;div data-bbl-html="This is sample {0} of {1}" data-bbl-parms="one|forty">&lt;/div>
+			<div style="margin-left:200px;margin-top:-10px;border:1px solid gray;width:250px" data-bbl-html="This is sample {0} of {1}" data-bbl-parms="one|forty"></div>
 		</pre>
         <form>
-            <input id=phrase size=20 value="This is a story"><input type=button data-bbl-value="Translate" onclick='doTrans()'>
+            <input id=phrase size=20 value="This is a sample"><input type=button data-bbl-value="Translate" onclick='doTrans()'>
         </form><input type='button' id='transBtn' data-bbl-value="Translate" style='width:100px;height:20px' onclick="doOtherTrans()">
-        </input>This is story one of forty via <b>bbl('This is story {0} of {1}',['one','forty'])</b>
+        </input>This is sample one of forty via <b>bbl('This is sample {0} of {1}',['one','forty'])</b>
         <br>
         <br>
         <div id="resultDiv" style="border:1px solid black;width:300px;height:30px;">

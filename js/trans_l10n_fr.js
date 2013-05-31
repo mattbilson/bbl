@@ -1,10 +1,10 @@
 bbl.set({
-    'This is a story': 'C\'est une histoire',
-    'This is story {0} of {1}': 'C\'est l\'histoire {0} sur {1}',
+    'This is a sample': 'Ceci est un exemple',
+    'This is sample {0} of {1}': 'C\'est &eacute;chantillon {0} sur {1}',
     'one': 'une',
     'forty': 'quarante',
     'Usage': 'Utilisation',
-    'bbl Translator Library': 'bbl Biblioth&eacute;que Translator',
+    'bbl Localization Service': 'Service de localisation bbl',
     'change the resource': 'modifier la ressource',
     'translate something': 'traduire quelque chose',
     'outputs': 'sorties',

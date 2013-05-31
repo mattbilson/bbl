@@ -17,9 +17,7 @@
     bbl.set = function(langRes){
         dt = langRes;
     }
-	bbl.resourcex = function() {
-		console.log('get it');
-	}
+    
     bbl.resource = function(langFile, readyCallback){
         $.get(langFile, function(){
             bbl.all();
@@ -33,7 +31,22 @@
         return dt;
     }
     bbl.one = function(resEl, attrName){
-        var resKey = resEl.getAttribute(attrName);
+        var resKey = null;
+        if (attrName == null) 
+            attrName = 'data-bbl-html';
+        resKey = resEl.getAttribute(attrName);
+        if (resKey == null) {
+            attrName = 'data-bbl-html';
+            resKey = resEl.getAttribute(attrName);
+        }
+        if (resKey == null) {
+            attrName = 'data-bbl-text';
+            resKey = resEl.getAttribute(attrName);
+        }
+        if (resKey == null) {
+            attrName = 'data-bbl-value';
+            resKey = resEl.getAttribute(attrName);
+        }
         var resParms = resEl.getAttribute('data-bbl-parms');
         var rp = null;
         if (resParms != null) 

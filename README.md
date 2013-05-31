@@ -66,19 +66,19 @@ var txt = bbl('This is a story');
 The resource files are straightforward JS objects configured as such:
 <pre>
 bbl.set({
-  <font color=green>  'This is a story': 'C\'est une histoire',
-    'This is story {0} of {1}': 'C\'est l\'histoire {0} sur {1}',
+    'This is a sample': 'Ceci est un exemple',
+    'This is sample {0} of {1}': 'C\'est &eacute;chantillon {0} sur {1}',
     'one': 'une',
     'forty': 'quarante',
     'Usage': 'Utilisation',
-    'bbl Translator Library': 'bbl Biblioth&eacute;que Translator',
+    'bbl Localization Service': 'Service de localisation bbl',
     'change the resource': 'modifier la ressource',
     'translate something': 'traduire quelque chose',
     'outputs': 'sorties',
     'Language Resource': 'Ressource en Langues',
     'Use the {0} resource': 'Utilisez le {0} ressource',
     'Translate': 'Traduire',
-  'Go ahead and change me':'Allez-y et changez-moi'</font>
+    'Go ahead and change me':'Allez-y et changez-moi'
 })
 
 </pre>
@@ -90,15 +90,15 @@ bbl supports basic parameterization capabilities. This allows you to put variabl
 
 For example, you could have a base language phrase:
 
-This is story {0} of {1}
+This is sample {0} of {1}
 
 Where {0} and {1} represent the order of parameter values that will be provided in an Array (or in the data-bbl-parms HTML attribute, separated by bars | ).
 
 In Javascript, you could translate the above via:
 
 <pre>
-var trans = bbl('This is story {0} of {1}',['1','40']);
-// output will be C'est l'histoire 1 sur 40
+var trans = bbl('This is sample {0} of {1}',['1','40']);
+// output will be C'est &eacute;chantillon 1 sur 40
 </pre>
 
 Because there are no translatable values for the two parameters, they will be simply dropped in as-is. <b>Note</b> that this is the case for any translation request -- if no translation of a phrase is available, the base phrase is returned.
@@ -106,14 +106,14 @@ Because there are no translatable values for the two parameters, they will be si
 If you do have translatable parameters, the parameters will be translated as well, i.e.
 
 <pre>
-var trans = bbl('This is story {0} of {1}',['one','forty']);
-// output will be C'est l'histoire une sur quarante
+var trans = bbl('This is sample {0} of {1}',['one','forty']);
+// output will be C'est &eacute;chantillon une sur quarante
 </pre>
 
 To do this declaratively in HTML, use data-bbl-parms:
 
 <pre>
-&lt;span data-bbl-html="This is story {0} of {1}" data-bbl-parms="one|forty">&lt;/span>
+&lt;span data-bbl-html="This is sample {0} of {1}" data-bbl-parms="one|forty">&lt;/span>
 </pre>
 
 Then, when the translation action occurs, the HTML will be replaced as above.

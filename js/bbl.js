@@ -1,3 +1,8 @@
+// bbl Localization Library
+// Bark Golgafrincham
+// 2013
+// http://github.com/barkgolgafrincham/bbl
+
 (function(){
     var dt = null;
     

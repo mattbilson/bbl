@@ -11,13 +11,15 @@
             }
         </style>
         <title>bbl Test Harness</title>
-        <script src=js/jquery.js>
+        <script src=http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js>
         </script>
         <script src=js/translate.js charset="utf-8">
         </script>
+        <script src=js/trans_l10n_en.js charset="utf-8">
+        </script>
         <script>
             function showKeys(){
-                var d = _.getDictionary();
+                var d = bbl.getDictionary();
                 var htm = "<b>Valid Keys</b><br>";
                 var keys = Object.keys(d);
                 for (var o in keys) {
@@ -28,62 +30,64 @@
             
             function doTrans(){
                 var a = document.getElementById('phrase').value;
-                document.getElementById('resultDiv').innerHTML = _(a);
+                document.getElementById('resultDiv').innerHTML = bbl(a);
             }
             
             function doOtherTrans(){
-                var x = _('This is story {0} of {1}', ['one', 'forty']);
+                var x = bbl('This is story {0} of {1}', ['one', 'forty']);
                 document.getElementById('resultDiv').innerHTML = x;
             }
         </script>
     </head>
     <body>
-        <h1 data-trans-html="bbl Translator Library"></h1>
-        <h2 data-trans-html="Usage"></h2>
-        <span data-trans-html="Language Resource"></span>: 
-        <select name=langFile onchange='_.resource(this.options[this.selectedIndex].value)'>
-            <option id='o1' data-trans-text="Use the {0} resource" data-parms="trans_l10n_en" value='js/trans_l10n_en.js'></option>
-            <option id='02' data-trans-text="Use the {0} resource" data-parms="trans_l10n_fr" value='js/trans_l10n_fr.js'></option>
+        <h1 data-bbl-html="bbl Translator Library"></h1>
+        <h2 data-bbl-html="Usage"></h2>
+        <span data-bbl-html="Language Resource"></span>: 
+        <select name=langFile onchange='bbl.resource(this.options[this.selectedIndex].value,showKeys)'>
+            <option id='o1' data-bbl-text="Use the {0} resource" data-bbl-parms="trans_l10n_en" value='js/trans_l10n_en.js'></option>
+            <option id='02' data-bbl-text="Use the {0} resource" data-bbl-parms="trans_l10n_fr" value='js/trans_l10n_fr.js'></option>
         </select>
+        <span style="color:green;font-weight:bold">&lt;---</span>
+        <span style="color:green;font-weight:bold" data-bbl-html='Go ahead and change me'></span>
         <br>
         <pre>
-		// <span data-trans-html="change the resource"></span>
-		_.resource('js/trans_l10n_fr.js');
+		// <span data-bbl-html="change the resource"></span>
+		bbl.resource('js/trans_l10n_fr.js');
 		
-		// <span data-trans-html="translate something"></span>
-		var txt = _('one'); 
-		// <span data-trans-html="outputs"></span> <i>une</i>
-		var txt = _('forty'); 
-		// <span data-trans-html="outputs"></span> <i>quarante</i>
+		// <span data-bbl-html="translate something"></span>
+		var txt = bbl('one'); 
+		// <span data-bbl-html="outputs"></span> <i>une</i>
+		var txt = bbl('forty'); 
+		// <span data-bbl-html="outputs"></span> <i>quarante</i>
 		
-		var txt = _('This is a story'); 
-		// <span data-trans-html="outputs"></span> <i>C'est une histoire</i>
+		var txt = bbl('This is a story'); 
+		// <span data-bbl-html="outputs"></span> <i>C'est une histoire</i>
 
-		var txt = _('This is story {0} of {1}',['1','40']); 
-		// <span data-trans-html="outputs"></span> <i>C'est l'histoire 1 sur 40</i>
+		var txt = bbl('This is story {0} of {1}',['1','40']); 
+		// <span data-bbl-html="outputs"></span> <i>C'est l'histoire 1 sur 40</i>
 
-		var txt = _('This is story {0} of {1}',['one','forty']); 
-		// <span data-trans-html="outputs"></span> <i>C'est l'histoire une sur quarante</i>
+		var txt = bbl('This is story {0} of {1}',['one','forty']); 
+		// <span data-bbl-html="outputs"></span> <i>C'est l'histoire une sur quarante</i>
 		
 		Could also have:
-			&lt;div data-trans-html="This is story {0} of {1}" data-parms="one|forty">&lt;/div>
-			<div style="margin-left:200px;margin-top:-10px;border:1px solid gray;width:250px" data-trans-html="This is story {0} of {1}" data-parms="one|forty"></div>
+			&lt;div data-bbl-html="This is story {0} of {1}" data-bbl-parms="one|forty">&lt;/div>
+			<div style="margin-left:200px;margin-top:-10px;border:1px solid gray;width:250px" data-bbl-html="This is story {0} of {1}" data-bbl-parms="one|forty"></div>
 		</pre>
-        <div id="keys" style="display:none">
-        </div>
-         <form>
-            <input id=phrase size=20 value="This is a story"><input type=button data-trans-value="Translate" onclick='doTrans()'>
-        </form><input type='button' id='transBtn' data-trans-value="Translate" style='width:100px;height:20px' onclick="doOtherTrans()">
-        </input>This is story one of forty via <b>_('This is story {0} of {1}',['one','forty'])</b>
+        <form>
+            <input id=phrase size=20 value="This is a story"><input type=button data-bbl-value="Translate" onclick='doTrans()'>
+        </form><input type='button' id='transBtn' data-bbl-value="Translate" style='width:100px;height:20px' onclick="doOtherTrans()">
+        </input>This is story one of forty via <b>bbl('This is story {0} of {1}',['one','forty'])</b>
         <br>
         <br>
         <div id="resultDiv" style="border:1px solid black;width:300px;height:30px;">
         </div>
-        <br>
+        <hr>
+        <div id="keys">
+        </div>
         <script>
             // initialize translation service
-			// this will automatically translate all data-trans-* elements
-            _.resource('js/trans_l10n_en.js');
+            // this will automatically translate all data-bbl-* elements
+            bbl.resource('js/trans_l10n_en.js', showKeys);
         </script>
     </body>
 </html>

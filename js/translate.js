@@ -1,7 +1,7 @@
 (function(){
     var dt = null;
     
-    var _ = function(aPhrase, parms){
+    var bbl = function(aPhrase, parms){
         var a = dt[aPhrase];
         if (a == null) 
             a = aPhrase;
@@ -9,47 +9,50 @@
             return a;
         var c = 0;
         for (c = 0; c < parms.length; c++) {
-            var pv = this._(parms[c]);
+            var pv = bbl(parms[c]);
             a = a.replace('{' + c + '}', pv);
         }
         return a;
     }
-    _.set = function(langRes){
+    bbl.set = function(langRes){
         dt = langRes;
     }
-    _.resource = function(langFile, readyCallback){
+	bbl.resourcex = function() {
+		console.log('get it');
+	}
+    bbl.resource = function(langFile, readyCallback){
         $.get(langFile, function(){
-            _.all();
+            bbl.all();
             if (readyCallback != null) 
                 readyCallback();
-        }).fail(function(){
+        }).fail(function(e){
             throw 'Error -- could not find language file ' + langFile;
         });
     }
-    _.getDictionary = function(){
+    bbl.getDictionary = function(){
         return dt;
     }
-    _.one = function(resEl, attrName){
+    bbl.one = function(resEl, attrName){
         var resKey = resEl.getAttribute(attrName);
-        var resParms = resEl.getAttribute('data-parms');
+        var resParms = resEl.getAttribute('data-bbl-parms');
         var rp = null;
         if (resParms != null) 
             rp = resParms.split("|");
         
         switch (attrName) {
-            case 'data-trans-html':
-                resEl.innerHTML = _(resKey, rp);
+            case 'data-bbl-html':
+                resEl.innerHTML = bbl(resKey, rp);
                 break;
-            case 'data-trans-text':
-                resEl.text = _(resKey, rp);
+            case 'data-bbl-text':
+                resEl.text = bbl(resKey, rp);
                 break;
-            case 'data-trans-value':
-                resEl.value = _(resKey, rp);
+            case 'data-bbl-value':
+                resEl.value = bbl(resKey, rp);
                 break;
         }
     }
-    _.all = function(){
-        var ats = ['data-trans-html', 'data-trans-text', 'data-trans-value'];
+    bbl.all = function(){
+        var ats = ['data-bbl-html', 'data-bbl-text', 'data-bbl-value'];
         for (var a in ats) {
             var resElms = document.querySelectorAll('[' + ats[a] + ']');
             for (var n = 0; n < resElms.length; n++) {
@@ -58,6 +61,6 @@
             }
         }
     }
-    window._ = _;
+    window.bbl = bbl;
 })();
 

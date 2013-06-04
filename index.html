@@ -43,7 +43,7 @@
         <h1 data-bbl-html="bbl Localization Service"></h1>
         <h2 data-bbl-html="Usage"></h2>
         <span data-bbl-html="Language Resource"></span>: 
-        <select name=langFile onchange='bbl.resource(this.options[this.selectedIndex].value,showKeys)'>
+        <select name=langFile onchange='	bbl.clear(); bbl.resource(this.options[this.selectedIndex].value,showKeys)'>
             <option id='o1' data-bbl-text="Use the {0} resource" data-bbl-parms="trans_l10n_en" value='js/trans_l10n_en.js'></option>
             <option id='02' data-bbl-text="Use the {0} resource" data-bbl-parms="trans_l10n_fr" value='js/trans_l10n_fr.js'></option>
         </select>
@@ -87,6 +87,7 @@
         <script>
             // initialize translation service
             // this will automatically translate all data-bbl-* elements
+		
             bbl.resource('js/trans_l10n_en.js', showKeys);
         </script>
     </body>

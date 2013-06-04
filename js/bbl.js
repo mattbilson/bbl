@@ -14,9 +14,20 @@
         }
         return a;
     }
+     bbl.clear = function(){
+        // clears the resource content
+        dt = null;
+    } 
     bbl.set = function(langRes){
-        dt = langRes;
+        //  adds the resource content to the current dictionary
+        if (dt == null) 
+            dt = {};
+        for (var o in langRes) {
+            dt[o] = langRes[o];
+        }
+        
     }
+    
     
     bbl.resource = function(langFile, readyCallback){
         $.get(langFile, function(){

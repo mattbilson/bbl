@@ -32,7 +32,11 @@ Once your HTML is built, in Javascript you would set the bbl language resource:
 </pre>
 This will automatically convert the data-bbl-* elements to the translated values. innerHTML, values and texts of the various objects will be updated.
 
-You can swap out the language file at any time by using bbl.resource(resourceFile).
+Note that setting the resource will actually append entries in that resource file to the existing dictionary being used by bbl. This lets you have a generic translation file, and then overlay that will additional content for an application-specific language file.
+
+Use bbl.clear() to clear out the dictionary being used by bbl.
+
+You can swap out the language file at any time by using bbl.clear() and bbl.resource(resourceFile).
 
 You can also translate newly-added content by calling the following, which will translate all translatable elements in the DOM:
 <pre>

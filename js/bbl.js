@@ -1,8 +1,3 @@
-// bbl Localization Library
-// Bark Golgafrincham
-// 2013
-// http://github.com/barkgolgafrincham/bbl
-
 (function(){
     var dt = null;
     
@@ -83,7 +78,8 @@
     bbl.all = function(){
         var ats = ['data-bbl-html', 'data-bbl-text', 'data-bbl-value'];
         for (var a in ats) {
-            var resElms = document.querySelectorAll('[' + ats[a] + ']');
+			// use jquery instead so we can support older browsers
+            var resElms = $('[' + ats[a] + ']');
             for (var n = 0; n < resElms.length; n++) {
                 var resEl = resElms[n];
                 this.one(resEl, ats[a]);

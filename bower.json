@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "homepage": "https://github.com/barkgolgafrincham/bbl",
   "authors": [
-    "barkgolgafrincham",  //actually coded it
-    "mattbilson"          //just ported to bower/amd
+    "barkgolgafrincham",
+    "mattbilson"
   ],
   "main": "js/bbl.js",
   "license": "see LICENSE file",

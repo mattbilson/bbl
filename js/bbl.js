@@ -1,4 +1,5 @@
-(function(){
+define(function(){
+
     var dt = null;
     
     var bbl = function(aPhrase, parms){
@@ -30,7 +31,8 @@
     
     
     bbl.resource = function(langFile, readyCallback){
-        $.get(langFile, function(){
+        $.getJSON(langFile, function(data){
+            bbl.set(data);
             bbl.all();
             if (readyCallback != null) 
                 readyCallback();
@@ -78,7 +80,7 @@
     bbl.all = function(){
         var ats = ['data-bbl-html', 'data-bbl-text', 'data-bbl-value'];
         for (var a in ats) {
-			// use jquery instead so we can support older browsers
+            // use jquery instead so we can support older browsers
             var resElms = $('[' + ats[a] + ']');
             for (var n = 0; n < resElms.length; n++) {
                 var resEl = resElms[n];
@@ -86,6 +88,6 @@
             }
         }
     }
-    window.bbl = bbl;
-})();
-
+    
+    return bbl;
+});
